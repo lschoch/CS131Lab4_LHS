@@ -127,4 +127,16 @@ public class FileProcessor {
 		
 	}//end getArrayListSize
 	
+	/**
+	 * Method to print the values of all instance variables.
+	 * 
+	 * @return a formatted string containing the values of all instance
+	 * variables
+	 */
+	@Override
+	public String toString() {
+		return "FileProcessor [fileName=" + fileName + ", stringLength=" + stringLength + ", stringList=" + stringList
+				+ ", input=" + input + "]";
+	}// end toString
+	
 }//end class
