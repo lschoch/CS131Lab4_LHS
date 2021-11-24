@@ -4,23 +4,26 @@ import java.io.FileNotFoundException;
 import java.io.File;
 
 /**
- * Class to print text files that have one string per line. Catches and 
- * handles FileNotFoundException and StringTooLongException.
+ * Class to print text files that have one string per line. Catches and handles
+ * FileNotFoundException and StringTooLongException.
  * 
  * @author lschoch
  * @version 1.0 CS-131-ON Lab4
  */
 public class FileProcessor {
 	
-	private String fileName; // The name of the file to be processed.
-	private int stringLength; // The maximum length allowed for the single 
-			// string on each line of the file.
-	private ArrayList<String> stringList; // An ArrayList object (array)
-	private Scanner input; // Scanner object for reading the file line by line.
-	
+	// The name of the file to be processed.
+	private String fileName;
+	// The maximum length allowed for the string on each line of the file.
+	private int stringLength; 
+	// An array object of type ArrayList
+	private ArrayList<String> stringList; 
+	// Scanner object for reading the file line by line.
+	private Scanner input; 
+
 	/**
-	 * Constructor to create a FileProcessor object specifying file name and 
-	 * maximum allowed length of the single string on each line.
+	 * Constructor to create a FileProcessor object specifying file name and
+	 * maximum length allowed for the string on each line.
 	 * 
 	 * @param fileName the name of the file to be processed
 	 * @param stringLength the maximum length allowed for each string
@@ -32,47 +35,45 @@ public class FileProcessor {
 		}
 		setStringLength(stringLength);
 		setFileName(fileName);
-			
+
 	}// end constructor
-	
+
 	/**
 	 * Method to read and print each line of the file specified by fileName,
-	 * includes catching and handling FileNotFoundException and 
-	 * StringTooLongException. 
+	 * includes catching and handling FileNotFoundException and
+	 * StringTooLongException.
 	 */
 	public void processFile() {
 		// Instantiate a StringTooLongException
 		StringTooLongException stlException = new StringTooLongException("String is too long!");
 		String line = "";
-		
-		// Check for file not found, can't proceed without a file to read.
+
+		// Check for file not found - can't proceed without a file to read.
 		try {
 			File file = new File(fileName);
 			input = new Scanner(file);
-		}
-		catch(FileNotFoundException fnf) {
+		} catch (FileNotFoundException fnf) {
 			System.out.println(fnf.getMessage());
 			return;
 		}
-		
+
 		// Step through the file line by line
-		while (input.hasNextLine()) {	
+		while (input.hasNextLine()) {
 			try {
 				line = input.nextLine();
-				// Check line length, throw exception if greater than 
-				// stringLength, otherwise print line. 
+				// Check length of string on each line, throw exception if 
+				// greater than stringLength, otherwise print line.
 				if (line.length() > stringLength) {
 					throw stlException;
 				}
 				System.out.println(line);
-			}
-			catch(StringTooLongException stl) {
+			} catch (StringTooLongException stl) {
 				System.out.println(stl.getMessage());
 			}
 		}
 		input.close();
-	}//end processFile
-	
+	}// end processFile
+
 	/**
 	 * Method to get value of the fileName parameter.
 	 * 
@@ -80,9 +81,9 @@ public class FileProcessor {
 	 */
 	public String getFileName() {
 		return fileName;
-		
+
 	}// end getFileName
-	
+
 	/**
 	 * Method to set a new value for the fileName parameter.
 	 * 
@@ -90,9 +91,9 @@ public class FileProcessor {
 	 */
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
-		
+
 	}// end setFileName
-	
+
 	/**
 	 * Method to get the value of the stringLength parameter.
 	 * 
@@ -100,9 +101,9 @@ public class FileProcessor {
 	 */
 	public int getStringLength() {
 		return stringLength;
-		
+
 	}// end get StringLength
-	
+
 	/**
 	 * Method to set a new value for the stringLength parameter.
 	 * 
@@ -114,9 +115,9 @@ public class FileProcessor {
 			stringLength = 5;
 		}
 		this.stringLength = stringLength;
-		
+
 	}// end setStringLength
-	
+
 	/**
 	 * Method to get the current size of stringList.
 	 * 
@@ -124,19 +125,18 @@ public class FileProcessor {
 	 */
 	public int getArrayListSize() {
 		return stringList.size();
-		
-	}//end getArrayListSize
-	
+
+	}// end getArrayListSize
+
 	/**
 	 * Method to print the values of all instance variables.
 	 * 
-	 * @return a formatted string containing the values of all instance
-	 * variables
+	 * @return a formatted string containing the values of all instance variables
 	 */
 	@Override
 	public String toString() {
 		return "FileProcessor [fileName=" + fileName + ", stringLength=" + stringLength + ", stringList=" + stringList
 				+ ", input=" + input + "]";
 	}// end toString
-	
-}//end class
+
+}// end class
